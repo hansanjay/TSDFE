@@ -1,0 +1,67 @@
+
+<div class="table-responsive text-nowrap table-striped mt-4">
+    <h4 class="fw-bold py-1 mb-1 text-center">
+        <span class="text-muted fw-light">Journey </span> Plan
+      </h4>
+      
+     
+      
+    <!-- <table class="table">
+      <thead class="table-light">
+ 
+              <tr>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                
+                  <th>Action</th>
+                
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of allOrders ">
+              
+                <td>{{prod.order_date}}</td>
+                <td><span *ngIf="prod.status==0" class="badge bg-label-success"> Active</span> 
+                    <span *ngIf="prod.status==1" class="badge bg-label-danger"> Inactive</span>
+                </td>
+               
+                
+                <td style="text-align: text-center">
+                    <i class="fa fa-play p-2" aria-hidden="true" title="Resume" *ngIf="prod.status==1" (click)="statusupdate(prod.id,0)" style="color: green;"></i>
+                    <i class="fa fa-stop p-2" aria-hidden="true" title="Pause" *ngIf="prod.status==0" (click)="statusupdate(prod.id,1)" style="color: red;"></i>
+                </td>
+        
+                
+              
+              </tr>
+          </tbody>
+      </table> -->
+    </div>
+    <!-- <div class="container">
+        <div class="row"> -->
+<table id="example" class="  display nowrap table table-hover table-striped table-bordered table-sm" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>Pincodes</th>
+            <th>Locality</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pin of pincodesDist">
+        
+          
+          <td>{{pin.pincode}}</td>
+          <td>{{pin.locality}}</td>
+         
+          
+     
+    
+          
+        
+        </tr>
+    </tbody>
+</table>
+<!-- </div>
+</div> -->

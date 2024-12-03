@@ -1,0 +1,231 @@
+<div class="container mt-4">
+    <!-- <h2 class="mb-4" *ngIf="!subId">Add Subscription Details </h2> -->
+    <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="!subId">
+      <span class="text-muted fw-light">Add </span> Subscription
+    </h4>
+    <!-- <h2 class="mb-4" *ngIf="subId">Edit Subscription Details </h2> -->
+    <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="subId">
+      <span class="text-muted fw-light">Edit </span> Subscription
+    </h4>
+    <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" *ngIf="!subId">
+      <div class="row"> 
+        <div class="col-md-4 mb-3">
+          <label for="brandId" class="form-label">Brand</label>
+          <select id="brand_id" class="form-select" formControlName="brandId">
+            <option value="">Select Brand</option>
+            <option *ngFor="let brand of allBrand" [value]="brand.id">{{ brand.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="category" class="form-label">Product Type</label>
+          <select id="productType" class="form-select" formControlName="productType" (ngModelChange)="fetchSubCategory($event)">
+            <option value="" disabled>Select Catalog</option>
+            <option *ngFor="let category of categoryOptions" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-select" formControlName="category" (ngModelChange)="fetchCategories($event)">
+            <option value="" disabled>Select Category</option>
+            <option *ngFor="let category of subCategoryOptions" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+       
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="sub_category" class="form-label">Sub Category</label>
+          <select id="sub_category" class="form-select" formControlName="subCategory" >
+            <option value="">Select Sub Category</option>
+            <option *ngFor="let subCategory of CategoryOptions1" [value]="subCategory.id">{{ subCategory.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input type="number" id="quantity" class="form-control" formControlName="quantity" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="day_of_week" class="form-label">Subsription Type</label>
+          <select id="day_of_week" class="form-select" formControlName="type" (ngModelChange)="selectSubType($event)">
+            <option value="">Select </option>
+            <option *ngFor="let type of subscriptionType" [value]="type.id">{{ type.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3" *ngIf="subType==2">
+          <label for="day_of_week" class="form-label">Day of Week</label>
+          <select id="day_of_week" class="form-select" formControlName="day_of_week">
+            <option value="">Select Day</option>
+            <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3" *ngIf="subType==3">
+          <label for="day_of_month" class="form-label">Day of Month</label>
+          <!-- <input type="number" id="day_of_month" class="form-control" formControlName="day_of_month" /> -->
+          <select id="day_of_week" class="form-select" formControlName="day_of_month">
+            <option value="">Select </option>
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" class="form-select" formControlName="status">
+            <option value="">Select Status</option>
+            <option *ngFor="let status of statusOptions" [value]="status.id">{{ status.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="start" class="form-label">Start Date</label>
+          <input type="date" id="start" class="form-control" formControlName="start" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="stop_date" class="form-label">Stop Date</label>
+          <input type="date" id="stop_date" class="form-control" formControlName="stop" />
+        </div>
+      </div>
+  
+      <div class="row">
+       
+       
+        <!-- <div class="col-md-4 mb-3">
+          <label for="pause_date" class="form-label">Pause Date</label>
+          <input type="date" id="pause_date" class="form-control" formControlName="pause_date" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="resume_date" class="form-label">Resume Date</label>
+          <input type="date" id="resume_date" class="form-control" formControlName="resume_date" />
+        </div> -->
+        <div class="col-md-2 mb-3">
+          <label for="permanent" class="form-label">Permanent</label>
+          <div class="form-check">
+            <input type="checkbox" id="permanent" class="form-check-input" formControlName="permanent" />
+            <label for="permanent" class="form-check-label">Yes</label>
+          </div>
+        </div>
+        <div class="col-md-2 mb-3">
+          <label for="visible" class="form-label">Temporary</label>
+          <div class="form-check">
+            <input type="checkbox" id="visible" class="form-check-input" formControlName="visible" />
+            <label for="visible" class="form-check-label">Yes</label>
+          </div>
+        </div>
+      </div>
+  
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <form [formGroup]="scheduleForm" (ngSubmit)="modifySubscription()" *ngIf="subId">
+      <div class="row"> 
+        <div class="col-md-4 mb-3">
+          <label for="brandId" class="form-label">Brand</label>
+          <select id="brand_id" class="form-select" formControlName="brandId" [(ngModel)]="selectedSubscription.brandId">
+            <option value="">Select Brand</option>
+            <option *ngFor="let brand of allBrand" [value]="brand.id">{{ brand.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="category" class="form-label">Product Type</label>
+          <select id="productType" class="form-select" formControlName="productType" (ngModelChange)="fetchSubCategory($event)" [(ngModel)]="selectedSubscription.productType">
+            <option value="" disabled>Select Catalog</option>
+            <option *ngFor="let category of categoryOptions" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select id="category" class="form-select" formControlName="category" (ngModelChange)="fetchCategories($event)" [(ngModel)]="selectedSubscription.category">
+            <option value="" disabled>Select Category</option>
+            <option *ngFor="let category of subCategoryOptions" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+       
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="sub_category" class="form-label">Sub Category</label>
+          <select id="sub_category" class="form-select" formControlName="subCategory" [(ngModel)]="selectedSubscription.subCategory">
+            <option value="">Select Sub Category</option>
+            <option *ngFor="let subCategory of CategoryOptions1" [value]="subCategory.id">{{ subCategory.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input type="number" id="quantity" class="form-control" formControlName="quantity" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="day_of_week" class="form-label">Subsription Type</label>
+          <select id="day_of_week" class="form-select" formControlName="type" (ngModelChange)="selectSubType($event)" [(ngModel)]="selectedSubscription.type">
+            <option value="">Select </option>
+            <option *ngFor="let type of subscriptionType" [value]="type.id">{{ type.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3" *ngIf="subType==2">
+          <label for="day_of_week" class="form-label">Day of Week</label>
+          <select id="day_of_week" class="form-select" formControlName="day_of_week" [(ngModel)]="selectedSubscription.day_of_week">
+            <option value="">Select Day</option>
+            <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3" *ngIf="subType==3" >
+          <label for="day_of_month" class="form-label">Day of Month</label>
+          <!-- <input type="number" id="day_of_month" class="form-control" formControlName="day_of_month" /> -->
+          <select id="day_of_week" class="form-select" formControlName="day_of_month" [(ngModel)]="selectedSubscription.day_of_month">
+            <option value="">Select </option>
+            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select id="status" class="form-select" formControlName="status" [(ngModel)]="selectedSubscription.status">
+            <option value="">Select Status</option>
+            <option *ngFor="let status of statusOptions" [value]="status.id">{{ status.name }}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="start" class="form-label">Start Date</label>
+          <input type="date" id="start" class="form-control" formControlName="start" [(ngModel)]="selectedSubscription.start"/>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="stop_date" class="form-label">Stop Date</label>
+          <input type="date" id="stop_date" class="form-control" formControlName="stop" [(ngModel)]="selectedSubscription.stop"/>
+        </div>
+      </div>
+  
+      <div class="row">
+       
+       
+        <!-- <div class="col-md-4 mb-3">
+          <label for="pause_date" class="form-label">Pause Date</label>
+          <input type="date" id="pause_date" class="form-control" formControlName="pause_date" />
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="resume_date" class="form-label">Resume Date</label>
+          <input type="date" id="resume_date" class="form-control" formControlName="resume_date" />
+        </div> -->
+        <div class="col-md-2 mb-3">
+          <label for="permanent" class="form-label">Permanent</label>
+          <div class="form-check">
+            <input type="checkbox" id="permanent" class="form-check-input" formControlName="permanent" />
+            <label for="permanent" class="form-check-label">Yes</label>
+          </div>
+        </div>
+        <div class="col-md-2 mb-3">
+          <label for="visible" class="form-label">Temporary</label>
+          <div class="form-check">
+            <input type="checkbox" id="visible" class="form-check-input" formControlName="visible" />
+            <label for="visible" class="form-check-label">Yes</label>
+          </div>
+        </div>
+      </div>
+  
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,44 @@
+<div class="table-responsive text-nowrap table-striped mt-4">
+  <h4 class="fw-bold py-1 mb-1 text-center">
+    <span class="text-muted fw-light">Subscription </span> Details
+
+  </h4>
+  <h6 class="fw-bold py-1 mb-2">
+    <span class="text-muted fw-light">{{custData.first_name}}  {{custData.last_name}} </span>  ({{custData.mobile}})
+    
+  </h6>
+    <table class="table">
+      <thead class="table-light">
+  <!-- <table id="example" class="  display nowrap table table-hover table-striped table-bordered table-sm" style="width:100%"> -->
+          <!-- <thead> -->
+              <tr>
+                  <th>Brand</th>
+                  <th>Start Date</th>
+                  <th>End Date</th> 
+                  <!-- <th>Unit Display</th> -->
+                  <th>MRP</th>
+                  <th>Action</th>
+                
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of allSubscription ">
+                <!-- <ng-container *ngIf="!user.isEditing"> -->
+                    <td>{{showBrandName(prod.brandId)}}</td>
+                    <td>{{prod.start}}</td>
+                    <td>{{prod.stop}}</td>
+                    <!-- <td>{{prod.mrp}}</td> -->
+                    <td>{{prod.status}}</td>
+                 <!-- <td class="text-center"></td> -->
+                <td style="text-align: text-center">
+                    <a  [routerLink]="['/subscribe',userData.id,custId]" [queryParams]="{ subId: prod.id}"><i class="fa fa-edit p-2" ></i> </a>
+                    <!-- <i class="fas fa-tasks"></i> -->
+                  <a [routerLink]="['/order-list',prod.id]"><i class="fa fa-tasks p-2" aria-hidden="true" title="Order list"></i></a>  
+                </td>
+        
+                
+              
+              </tr>
+          </tbody>
+      </table>
+    </div>

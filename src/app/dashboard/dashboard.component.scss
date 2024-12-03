@@ -1,0 +1,39 @@
+body {
+    font-size: 0.875rem;
+  }
+  
+  .nav-link {
+    color: #000;
+  }
+  
+  .nav-link.active {
+    color: #0d6efd;
+  }
+  
+  .sidebar {
+    height: 100vh;
+    padding-top: 20px;
+  }
+  
+  .sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .sidebar .nav-link .bi {
+    margin-right: 4px;
+  }
+  
+  .sidebar .nav-link:hover {
+    color: #0d6efd;
+  }
+  
+  .sidebar .nav-item + .nav-item {
+    margin-top: 1rem;
+  }
+  
+  .sidebar .collapse .nav-link {
+    font-weight: 400;
+    padding-left: 1.5rem;
+  }
+  

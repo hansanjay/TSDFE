@@ -1,0 +1,97 @@
+<div class="table-responsive text-nowrap table-striped mt-4">
+    <h4 class="fw-bold py-1 mb-1 text-center">
+        <span class="text-muted fw-light">Order </span> List
+      </h4>
+      <h6 class="fw-bold py-1 mb-2">
+        <span class="text-muted fw-light">{{custData.first_name}}  {{custData.last_name}} </span>  ({{custData.mobile}})
+        <span style="float: right;"> Subscription Id : {{subscriptionId}}</span>
+       
+        
+      </h6>
+     
+      
+    <!-- <table class="table">
+      <thead class="table-light">
+ 
+              <tr>
+                  <th>Order Date</th>
+                  <th>Status</th>
+                
+                  <th>Action</th>
+                
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of allOrders ">
+              
+                <td>{{prod.order_date}}</td>
+                <td><span *ngIf="prod.status==0" class="badge bg-label-success"> Active</span> 
+                    <span *ngIf="prod.status==1" class="badge bg-label-danger"> Inactive</span>
+                </td>
+               
+                
+                <td style="text-align: text-center">
+                    <i class="fa fa-play p-2" aria-hidden="true" title="Resume" *ngIf="prod.status==1" (click)="statusupdate(prod.id,0)" style="color: green;"></i>
+                    <i class="fa fa-stop p-2" aria-hidden="true" title="Pause" *ngIf="prod.status==0" (click)="statusupdate(prod.id,1)" style="color: red;"></i>
+                </td>
+        
+                
+              
+              </tr>
+          </tbody>
+      </table> -->
+    </div>
+    <div class="container">
+        <div class="row">
+        <ng-container *ngFor="let prod of allOrders ">
+                 
+            
+            <!-- <div class="card col-lg-2" >
+                <div class="card-body">
+                <h5 class="card-title">ID : {{prod.id}} </h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{prod.order_date}} </h6>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <span *ngIf="prod.status==0" class="badge bg-label-success"> Active</span> 
+                        <span *ngIf="prod.status==1" class="badge bg-label-danger"> Inactive</span>
+                        <i class="fa fa-play p-2" aria-hidden="true" title="Resume" *ngIf="prod.status==1" (click)="statusupdate(prod.id,0)" style="color: green;"></i>
+                        <i class="fa fa-stop p-2" aria-hidden="true" title="Pause" *ngIf="prod.status==0" (click)="statusupdate(prod.id,1)" style="color: red;"></i>
+                  </h6>
+                 
+                </div>
+              </div> -->
+           
+ <div class="col-lg-2">
+        <div class="card card-margin">
+            <!-- <div class="card-header no-border">
+                <h5 class="card-title">MOM</h5>
+            </div> -->
+            <div class="card-body pt-1">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper">
+                        <div class="widget-49-date-primary">
+                            <span class="widget-49-date-day">ID</span>
+                            <span class="widget-49-date-month">{{prod.id}} </span>
+                        </div>
+                        <div class="widget-49-meeting-info">
+                            <span class="widget-49-pro-title">Date</span>
+                            <span class="widget-49-meeting-time">{{prod.order_date}}</span>
+                        </div>
+                    </div>
+                    <!-- <ol class="widget-49-meeting-points">
+                        <li class="widget-49-meeting-item"><span>Expand module is removed</span></li>
+                        <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
+                        <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
+                    </ol> -->
+                    <div class="widget-49-meeting-action">
+                        <span *ngIf="prod.status==0" class="badge bg-label-success"> Active</span> 
+                        <span *ngIf="prod.status==1" class="badge bg-label-danger"> Inactive</span>
+                        <i class="fa fa-play p-2" aria-hidden="true" title="Resume" *ngIf="prod.status==1" (click)="statusupdate(prod.id,0)" style="color: green;"></i>
+                        <i class="fa fa-stop p-2" aria-hidden="true" title="Pause" *ngIf="prod.status==0" (click)="statusupdate(prod.id,1)" style="color: red;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+        </div>
+      </div>

@@ -1,0 +1,180 @@
+
+
+
+  
+
+  
+  <div class="">
+    <!-- <h5 class="card-header">Light Table head</h5> -->
+    <!-- <div class="d-flex w-100 p-4">
+      <h4 class="form-label label p-2 mt-2 "> <span class="text-muted fw-light">Search </span> Distributor:</h4>
+      <form (ngSubmit)="searchUser()" class="search-form d-flex justify-content-center align-items-center w-50">
+       
+        <select id="key" [(ngModel)]="searchKey" name="searchKey" class="form-select custom-select">
+          <option value="All" selected>All</option>
+          <option value="mobile">Mobile</option>
+          <option value="pan">PAN</option>
+          <option value="adhar">Adhaar</option>
+        </select>
+      
+        <input type="text" [(ngModel)]="searchValue" name="searchValue" placeholder="Enter value" *ngIf="searchKey !== 'All'" class="form-control custom-input" />
+      
+        <button type="submit" class="btn custom-button">Search</button>
+        <button type="button" class="btn custom-button" routerLink="/Register">Add </button>
+      </form>
+    </div> -->
+     <!-- Search -->
+     <div class="navbar-nav align-items-center ">
+      <!-- <div class=" d-flex align-items-center w-50 p-4">
+        <i class="bx bx-search fs-4 lh-0"></i>
+        <input
+          type="text"
+          class="form-control  shadow"
+          placeholder="Search..."
+          name="search" [(ngModel)]="searchText" 
+        />
+      </div> -->
+      <div class="input-group m-t-15"><input  type="text"
+        class="form-control  shadow"
+        placeholder="Search..."
+        name="search" [(ngModel)]="searchText"  class="form-control">
+        <div class="input-group-append"><button class="btn btn-primary"><i _ngcontent-sdg-c54="" class="feather icon-message-circle"></i></button></div></div>
+    </div>
+    <!-- /Search -->
+    <div class="table-responsive text-nowrap table-striped mt-4">
+      <table class="table">
+        <thead class="table-light">
+          <tr>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Mobile No</th>
+              <th>Status</th>
+              <th> Pin Code</th>
+              <th>Actions</th>
+            
+          
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          <tr *ngFor="let user of users | filter:searchText">
+            <ng-container *ngIf="!user.isEditing">
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobile}}</td>
+           
+            <td><span class="badge me-1" [class]="getIconColor(user.active)" >{{user.active}}</span></td>
+            <td > <span class="badge bg-label-success me-1"><i class="fa fa-map-pin" aria-hidden="true" (click)="fetchPincodes(user.id)" data-bs-toggle="modal" data-bs-target="#pincodesPop"></i></span></td>
+        </ng-container>
+            <ng-container *ngIf="user.isEditing">
+            <td ><input [(ngModel)]="user.first_name" [readonly]="!user.isEditing" class="form-control"></td>
+            <td ><input [(ngModel)]="user.last_name" [readonly]="!user.isEditing" class="form-control"></td>
+            <td><input [(ngModel)]="user.email" [readonly]="!user.isEditing" class="form-control" Disabled></td>
+            <td><input [(ngModel)]="user.mobile" [readonly]="!user.isEditing" class="form-control" Disabled></td>
+           
+           
+            <td> <select name="" id="" [(ngModel)]="user.active" class="form-select">
+                  <option  *ngFor="let option of activeStatus" [value]="option">{{option}}</option>
+            </select></td>
+            <td></td>
+        </ng-container>
+            
+            <td class="d-flex">
+              <a [routerLink]="['/Register']" [queryParams]="{ userId: user.id}"> <i *ngIf="!user.isEditing" class="fa fa-edit p-1" title="Edit Details"   style="color: #696cff;"></i> </a>
+              <a [routerLink]="['/address/',user.mobile,user.id]"><i class="fa fa-address-card p-1" title="Address"></i> </a>
+              <!-- <button *ngIf="user.isEditing" (click)="saveUser(user)" class="btn btn-primary">Save</button> -->
+              <i class="fa fa-save p-1" *ngIf="user.isEditing" (click)="saveUser(user)" style="color: #696cff;"></i>
+              <i *ngIf="user.isEditing" class="icon feather icon-rotate-ccw text-c-blue mb-1 d-block p-1" (click)="user.isEditing=false"></i>
+              <i  style="color: #696cff;" class="fa fa-upload p-1" aria-hidden="true" title="Allocate Pin code" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" (click)="captureDistId(user.id)"></i>
+            </td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+  </div> 
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-bas-dismiss="modal" aria-bs-label="Close">
+            <span aria-bs-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="input-group">
+                  <label class="input-group-btn my-0">
+                              <span class="btn btn-large btn-outline-primary rounded-0" id="browse">
+                                  Browse&hellip; 
+                                <input id="csv-input" type="file" accept=".csv" multiple (change)="upload($event)">
+                              </span>
+                          </label>
+                  <input type="text" class="form-control rounded-0" readonly placeholder="Upload Pincodes CSV" [(ngModel)]="fileName">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary rounded-0" type="button" (click)="onImport()" data-bs-dismiss="modal">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- pincode -->
+  <div class="modal fade" id="pincodesPop" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-bas-dismiss="modal" aria-bs-label="Close">
+            <span aria-bs-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body">
+          <table id="example" class="  display nowrap table table-hover table-striped table-bordered table-sm" style="width:100%">
+            <thead>
+                <tr>
+
+                    <th>Pincodes</th>
+                    <th>Locality</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pin of pincodesDist">
+                
+                  
+                  <td>{{pin.pincode}}</td>
+                  <td>{{pin.locality}}</td>
+                 
+                  
+             
+            
+                  
+                
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  
+  

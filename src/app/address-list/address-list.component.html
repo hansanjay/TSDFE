@@ -1,0 +1,74 @@
+<div class="container-fluid">
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="fw-bold py-3 mb-4 text-center">
+                <span class="text-muted fw-light"></span> Address
+              </h4>
+            <!-- <span class="d-block m-t-5">use class <code>table-striped</code> inside table element</span> -->
+        </div>
+        <div class="card-body table-border-style">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Short Name</th>
+                            <th>Address</th>
+                           
+                            <th>Locality</th>
+                            <th>City</th>
+                            <th>State</th>
+                            
+                            <th>Pincode</th>
+                            
+                            <th>Mobile</th>
+                            <th>Default</th>
+                            <th>Verified</th>
+                            <th *ngIf="!agentPincode">Allocated Agent</th>
+                            <th *ngIf="agentPincode">Allocate Agent </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                   
+                        <tr *ngFor="let add of addressDetails">
+                            <ng-container *ngIf="!add.isEditing">
+                            <td>{{add.short_name}}</td>
+                            <td>{{add.address}}</td>
+                            <td *ngIf="add.localityId">{{showLocality(add.localityId)}}</td>
+                            <td *ngIf="add.city">{{ showCity(add.city)}}</td>
+                            <td *ngIf="add.state_name">{{showState(add.state_name) }}</td>
+                            
+                            <td>{{add.pin_code}}</td>
+
+                            <td>{{add.mobile}}</td>
+                            <td>{{add.defaultAddress}}</td>
+                            <td>{{add.verifiedAddress}}
+                                </td>
+                            </ng-container>
+                           
+                    
+                          
+                            <td *ngIf="!agentPincode "> <button class="btn btn-primary" *ngIf="!agentPincode" (click)="fetchAgentPincodes(add.pin_code,add.localityId)">Allocate</button></td>
+                            <td *ngIf="agentPincode" class="d-flex p-2">
+                                 <select name="cpincode" class="form-select" id="" style="width:200px" (change)="selectAgentId($event)">
+                                <option value="" selected>select Agent</option>
+                               <option *ngFor="let option of agentPincode" [value]="option?.id"> {{option.first_name}} ({{option.mobile}})</option>
+                            </select>
+                            <i class="fa fa-save customC" (click)="saveAllocation(add)"></i>
+                        </td>
+                        <td>
+                           <a [routerLink]="['/address-edit',mobile,custId,add.id]"><i *ngIf="!add.isEditing" class="fa fa-edit p-2" title="Edit Details" ></i></a> 
+                            <i *ngIf="add.isEditing" class="fa fa-save p-2" title="Save Details" (click)="modifyAddress(add)"></i>
+                        </td>
+                       
+                           
+                        </tr>
+                  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

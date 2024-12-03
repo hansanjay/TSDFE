@@ -1,0 +1,185 @@
+<form [formGroup]="CustRegistrationForm" (ngSubmit)="onSubmit()" class="container-fluid mt-5 p-4 border rounded bg-light shadow-sm">
+  <h4 class="fw-bold py-3 mb-4 text-center">
+    <span class="text-muted fw-light">Registration </span> {{ userType }}
+  </h4>
+  
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="first_name" class="form-label">First Name:</label>
+      <input id="first_name" formControlName="first_name" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('first_name')?.invalid && CustRegistrationForm.get('first_name')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('first_name')?.invalid && CustRegistrationForm.get('first_name')?.touched" class="invalid-feedback">
+        First name is required.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="last_name" class="form-label">Last Name:</label>
+      <input id="last_name" formControlName="last_name" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('last_name')?.invalid && CustRegistrationForm.get('last_name')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('last_name')?.invalid && CustRegistrationForm.get('last_name')?.touched" class="invalid-feedback">
+        Last name is required.
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="userName" class="form-label">Username:</label>
+      <input id="userName" formControlName="username" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('username')?.invalid && CustRegistrationForm.get('username')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('username')?.invalid && CustRegistrationForm.get('username')?.touched" class="invalid-feedback">
+        Username is required and must be at least 3 characters long.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="password" class="form-label">Password:</label>
+      <input id="password" formControlName="password" type="password" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('password')?.invalid && CustRegistrationForm.get('password')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('password')?.invalid && CustRegistrationForm.get('password')?.touched" class="invalid-feedback">
+        Password is required and must be at least 6 characters long.
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email:</label>
+      <input id="email" formControlName="email" type="email" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('email')?.invalid && CustRegistrationForm.get('email')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('email')?.invalid && CustRegistrationForm.get('email')?.touched" class="invalid-feedback">
+        Please enter a valid email address.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="mobile" class="form-label">Mobile Number:</label>
+      <input id="mobile" formControlName="mobile" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('mobile')?.invalid && CustRegistrationForm.get('mobile')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('mobile')?.invalid && CustRegistrationForm.get('mobile')?.touched" class="invalid-feedback">
+        Mobile number is required and must be 10 digits.
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3" *ngIf="userType == 'agent'">
+    <div class="col-md-6">
+      <label for="aadhar_card" class="form-label">Adhaar:</label>
+      <input id="aadhar_card" formControlName="aadhar_card" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('aadhar_card')?.invalid && CustRegistrationForm.get('aadhar_card')?.touched}"/>
+      <div *ngIf="CustRegistrationForm.get('aadhar_card')?.invalid && CustRegistrationForm.get('aadhar_card')?.touched" class="invalid-feedback">
+        Aadhar card is required.
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="verification_expiry" class="form-label">Verification Expiry:</label>
+      <input id="verification_expiry" formControlName="verification_expiry" type="date" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('verification_expiry')?.invalid && CustRegistrationForm.get('verification_expiry')?.touched}" />
+      <div *ngIf="CustRegistrationForm.get('verification_expiry')?.invalid && CustRegistrationForm.get('verification_expiry')?.touched" class="invalid-feedback">
+        Verification expiry date is required.
+      </div>
+    </div>
+  </div>
+
+  <div formGroupName="addressReq" class="mb-4">
+    <h4 class="mb-3">Address Information</h4>
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="short_name" class="form-label">Short Name:</label>
+        <input id="short_name" formControlName="short_name" type="text" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label for="line1" class="form-label">Line 1:</label>
+        <input id="line1" formControlName="line1" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.line1')?.invalid && CustRegistrationForm.get('addressReq.line1')?.touched}" />
+        <div *ngIf="CustRegistrationForm.get('addressReq.line1')?.invalid && CustRegistrationForm.get('addressReq.line1')?.touched" class="invalid-feedback">
+          Line 1 is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="line2" class="form-label">Line 2:</label>
+        <input id="line2" formControlName="line2" type="text" class="form-control" />
+      </div>
+    </div>
+    
+    <!-- <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="line3" class="form-label">Line 3:</label>
+        <input id="line3" formControlName="line3" type="text" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label for="geo_tag" class="form-label">Geo Tag:</label>
+        <input id="geo_tag" formControlName="geo_tag" type="text" class="form-control" />
+      </div>
+      <div class="col-md-4">
+        <label for="journey_id" class="form-label">Journey ID:</label>
+        <input id="journey_id" formControlName="journey_id" type="number" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.journey_id')?.invalid && CustRegistrationForm.get('addressReq.journey_id')?.touched}" />
+        <div *ngIf="CustRegistrationForm.get('addressReq.journey_id')?.invalid && CustRegistrationForm.get('addressReq.journey_id')?.touched" class="invalid-feedback">
+          Journey ID must be a valid number.
+        </div>
+      </div>
+    </div> -->
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="country" class="form-label">Country:</label>
+        <select id="country" formControlName="country" class="form-select" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.country')?.invalid && CustRegistrationForm.get('addressReq.country')?.touched}"  (ngModelChange)="selectState($event)">
+          <option value="">Select Country</option>
+          <option *ngFor="let option of country?.data" [value]="option.countryCode">{{ option.countryName }}</option>
+        </select>
+        <div *ngIf="CustRegistrationForm.get('addressReq.country')?.invalid && CustRegistrationForm.get('addressReq.country')?.touched" class="invalid-feedback">
+          Country is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="state_name" class="form-label">State:</label>
+        <select id="state_name" formControlName="state_name" class="form-select" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.state_name')?.invalid && CustRegistrationForm.get('addressReq.state_name')?.touched}" (ngModelChange)="selectCity($event)">
+          <option value="">Select State</option>
+          <option *ngFor="let option of state?.data" [value]="option.id">{{ option.stateName }}</option>
+        </select>
+        <div *ngIf="CustRegistrationForm.get('addressReq.state_name')?.invalid && CustRegistrationForm.get('addressReq.state_name')?.touched" class="invalid-feedback">
+          State is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="city" class="form-label">City:</label>
+        <select id="city" formControlName="city" class="form-select" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.city')?.invalid && CustRegistrationForm.get('addressReq.city')?.touched}" (ngModelChange)="selectLocality($event)">
+          <option value="">Select City</option>
+          <option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
+        </select>
+        <div *ngIf="CustRegistrationForm.get('addressReq.city')?.invalid && CustRegistrationForm.get('addressReq.city')?.touched" class="invalid-feedback">
+          City is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-md-4">
+        <label for="localityId" class="form-label">Locality:</label>
+        <select id="localityId" formControlName="localityId" class="form-select" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.localityId')?.invalid && CustRegistrationForm.get('addressReq.localityId')?.touched}">
+          <option value="">Select Locality</option>
+          <option *ngFor="let loc of locality" [value]="loc.localityId">{{ loc.localityName }}</option>
+        </select>
+        <div *ngIf="CustRegistrationForm.get('addressReq.localityId')?.invalid && CustRegistrationForm.get('addressReq.localityId')?.touched" class="invalid-feedback">
+          Locality is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="address" class="form-label">Address:</label>
+        <input id="address" formControlName="address" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.address')?.invalid && CustRegistrationForm.get('addressReq.address')?.touched}" />
+        <div *ngIf="CustRegistrationForm.get('addressReq.address')?.invalid && CustRegistrationForm.get('addressReq.address')?.touched" class="invalid-feedback">
+          Address is required.
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="pin_code" class="form-label">PIN Code:</label>
+        <input id="pin_code" formControlName="pin_code" type="text" class="form-control" [ngClass]="{'is-invalid': CustRegistrationForm.get('addressReq.pin_code')?.invalid && CustRegistrationForm.get('addressReq.pin_code')?.touched}" />
+        <div *ngIf="CustRegistrationForm.get('addressReq.pin_code')?.invalid && CustRegistrationForm.get('addressReq.pin_code')?.touched" class="invalid-feedback">
+          PIN code is required and must be 6 digits.
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="row mb-3">
+      <div class="col-md-3" style="width: 200px;">
+        <label for="is_verified" class="form-label" style="width: 100px;">Is Verified:</label>
+        <input id="is_verified" formControlName="is_verified" type="checkbox" class="form-check-input" style="width: 20px;"/>
+      </div>
+      <div class="col-md-3"  style="width: 200px;">
+        <label for="is_default" class="form-label" style="width: 100px;">Is Default:</label>
+        <input id="is_default" formControlName="is_default" type="checkbox" class="form-check-input"  style="width: 20px;"/>
+      </div>
+    </div> -->
+  </div>
+
+  <button type="submit" class="btn btn-dark" style="width: 150px;">Register</button>
+</form>

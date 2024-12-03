@@ -1,0 +1,65 @@
+
+    <!-- <div class=" d-flex align-items-center w-50 p-4">
+      <i class="bx bx-search fs-4 lh-0"></i>
+      <input
+        type="text"
+        class="form-control  shadow"
+        placeholder="Search..."
+        name="search" [(ngModel)]="searchText" 
+      />
+    </div> -->
+    <div class=" container-fluid">
+          <h4 class="fw-bold py-3 mb-4 text-center">
+            <span class="text-muted fw-light">View </span> Users
+          </h4>
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="country" class="form-label">Distributor:</label>
+            <select  class="form-select" (change)="selectDist($event)">
+              <option value="" selected >Select Distributor</option>
+              <option *ngFor="let option of users" [value]="option.id">{{ option.first_name }} - {{ option.mobile }}</option>
+            </select>
+           
+          </div>
+          <div class="col-md-6">
+            <label for="state_name" class="form-label">User Type:</label>
+            <select   class="form-select" (change)="selectUserType($event,false)">
+              <option value="" selected >Select user type</option>
+              <option *ngFor="let option of userType" [value]="option.key">{{ option.value }}</option>
+            </select>
+            <!-- <div *ngIf="registrationForm.get('addressReq.state_name')?.invalid && registrationForm.get('addressReq.state_name')?.touched" class="invalid-feedback">
+              State is required.
+            </div> -->
+          </div>
+     
+        </div>
+      </div>
+  
+  <!-- /Search -->
+  <div class="table-responsive text-nowrap table-striped mt-4">
+    <table class="table">
+      <thead class="table-light">
+        <tr>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <!-- <th>Status</th>
+            <th> Pin Code</th>
+            <th>Actions</th> -->
+          
+        
+        </tr>
+      </thead>
+      <tbody class="table-border-bottom-0">
+        <tr *ngFor="let user of allUsers">
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.mobile}}</td>
+        </tr>
+      
+      </tbody>
+    </table>
+  </div>

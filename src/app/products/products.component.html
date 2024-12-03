@@ -1,0 +1,287 @@
+<div class="container mt-4">
+ 
+  <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="!selectedProducts">
+    <span class="text-muted fw-light">Add </span> Product Details
+  </h4>
+  <!-- <h2 class="mb-4" *ngIf="selectedProducts">Edit Product Details</h2> -->
+  <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="selectedProducts">
+    <span class="text-muted fw-light">Edit </span> Product Details
+  </h4>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" *ngIf="!selectedProducts">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="brandId" class="form-label">Brand</label>
+        <select id="brandId" class="form-select" formControlName="brandId" >
+          <option value="">Select Brand</option>
+          <option *ngFor="let brand of allBrand" [value]="brand.id">{{ brand.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('brandId')?.invalid && productForm.get('brandId')?.touched" class="text-danger">
+          Brand is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title" />
+        <div *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched" class="text-danger">
+          Title is required and must be at least 3 characters long.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="mrp" class="form-label">MRP</label>
+        <input type="number" id="mrp" class="form-control" formControlName="mrp" />
+        <div *ngIf="productForm.get('mrp')?.invalid && productForm.get('mrp')?.touched" class="text-danger">
+          MRP is required and must be a positive number.
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="category" class="form-label">Catalog</label>
+        <select id="prdType" class="form-select" formControlName="prdType" (ngModelChange)="fetchSubCategory($event)" >
+          <option value="" disabled>Select Catalog</option>
+          <option *ngFor="let category of categoryOptions" [value]="category.id">{{ category.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('prdType')?.invalid && productForm.get('prdType')?.touched" class="text-danger">
+          Catalog is required.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" class="form-select" formControlName="category" (ngModelChange)="fetchCategories($event)" >
+          <option value="" disabled>Select Category</option>
+          <option *ngFor="let category of subCategoryOptions" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="sub_category" class="form-label">Sub Category</label>
+        <select id="subCategory" class="form-select" formControlName="subCategory" >
+          <option value="">Select Sub Category</option>
+          <option *ngFor="let subCategory of CategoryOptions1" [value]="subCategory.id">{{ subCategory.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('subCategory')?.invalid && productForm.get('subCategory')?.touched" class="text-danger">
+          Sub Category is required.
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="shelf_life" class="form-label">Shelf Life</label>
+        <input type="text" id="shelfLife" class="form-control" formControlName="shelfLife" />
+        <div *ngIf="productForm.get('shelfLife')?.invalid && productForm.get('shelfLife')?.touched" class="text-danger">
+          Shelf Life is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="unit_display" class="form-label">Unit Display</label>
+        <!-- <input type="text" id="unitDisplay" class="form-control" formControlName="unitDisplay" /> -->
+        <select id="unitDisplay" class="form-select" formControlName="unitDisplay" >
+          <option value="">Select Unit Display</option>
+          <option *ngFor="let unit of unitDisplays" [value]="unit.key">{{ unit.value }}</option>
+        </select>
+        <div *ngIf="productForm.get('unitDisplay')?.invalid && productForm.get('unitDisplay')?.touched" class="text-danger">
+          Unit Display is required.
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="unit_display" class="form-label"> SSU </label>
+        <!-- <input type="text" id="unitDisplay" class="form-control" formControlName="unitDisplay" /> -->
+        <select id="ssu" class="form-select" formControlName="ssu" [(ngModel)]="unit">
+          <option value="">Select SSU</option>
+          <option *ngFor="let unit of stdUnits" [value]="unit.key">{{ unit.value }}</option>
+        </select>
+        <div *ngIf="productForm.get('ssu')?.invalid && productForm.get('ssu')?.touched" class="text-danger">
+          SSU  is required.
+        </div>
+      </div>
+  
+      <div class="col-md-2 mb-3">
+        <label for="unit" class="form-label">Unit</label>
+        <input type="number" id="unit" class="form-control" [step]="unit" formControlName="unit" />
+        <div *ngIf="productForm.get('unit')?.invalid && productForm.get('unit')?.touched" class="text-danger">
+          Unit is required.
+        </div>
+      </div>
+      
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="packaging_type" class="form-label">Packaging Type</label>
+        <input type="text" id="packagingType" class="form-control" formControlName="packagingType" />
+        <div *ngIf="productForm.get('packagingType')?.invalid && productForm.get('packagingType')?.touched" class="text-danger">
+          Packaging Type is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="return_policy" class="form-label">Return Policy</label>
+        <select id="return_policy" class="form-select" formControlName="return_policy">
+          <option value="">Select Return Policy</option>
+          <option *ngFor="let return of returnPolicy" [value]="return">{{ return }}</option>
+        </select>
+        <div *ngIf="productForm.get('return_policy')?.invalid && productForm.get('return_policy')?.touched" class="text-danger">
+          Return Policy is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="features" class="form-label">Features</label>
+        <textarea id="features" class="form-control" formControlName="features"></textarea>
+        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
+          Features cannot exceed 500 characters.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="discount" class="form-label">Discount</label>
+        <input id="discount" class="form-control" formControlName="discount">
+        <div *ngIf="productForm.get('discount')?.invalid && productForm.get('discount')?.touched" class="text-danger">
+          discount cannot exceed 500 characters.
+        </div>
+      </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <form [formGroup]="productForm" (ngSubmit)="onMOdify()" *ngIf="selectedProducts">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="brandId" class="form-label">Brand</label>
+        <select id="brandId" class="form-select" formControlName="brandId" [(ngModel)]="selectedProducts.brandId">
+          <option value="">Select Brand</option>
+          <option *ngFor="let brand of allBrand" [value]="brand.id">{{ brand.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('brandId')?.invalid && productForm.get('brandId')?.touched" class="text-danger">
+          Brand is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" class="form-control" formControlName="title" [(ngModel)]="selectedProducts.title"/>
+        <div *ngIf="productForm.get('title')?.invalid && productForm.get('title')?.touched" class="text-danger">
+          Title is required and must be at least 3 characters long.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="mrp" class="form-label">MRP</label>
+        <input type="number" id="mrp" class="form-control" formControlName="mrp" [(ngModel)]="selectedProducts.mrp"/>
+        <div *ngIf="productForm.get('mrp')?.invalid && productForm.get('mrp')?.touched" class="text-danger">
+          MRP is required and must be a positive number.
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="category" class="form-label">Catalog</label>
+        <select id="prdType" class="form-select" formControlName="prdType" (ngModelChange)="fetchSubCategory($event)" [(ngModel)]="selectedProducts.prdType">
+          <option value="" disabled>Select Catalog</option>
+          <option *ngFor="let category of categoryOptions" [value]="category.id">{{ category.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('prdType')?.invalid && productForm.get('prdType')?.touched" class="text-danger">
+          Catalog is required.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" class="form-select" formControlName="category" (ngModelChange)="fetchCategories($event)" [(ngModel)]="selectedProducts.category">
+          <option value="" disabled>Select Category</option>
+          <option *ngFor="let category of subCategoryOptions" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="sub_category" class="form-label">Sub Category</label>
+        <select id="subCategory" class="form-select" formControlName="subCategory" [(ngModel)]="selectedProducts.subCategory">
+          <option value="">Select Sub Category</option>
+          <option *ngFor="let subCategory of CategoryOptions1" [value]="subCategory.id">{{ subCategory.name }}</option>
+        </select>
+        <div *ngIf="productForm.get('subCategory')?.invalid && productForm.get('subCategory')?.touched" class="text-danger">
+          Sub Category is required.
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="shelf_life" class="form-label">Shelf Life</label>
+        <input type="text" id="shelfLife" class="form-control" formControlName="shelfLife" [(ngModel)]="selectedProducts.shelfLife"/>
+        <div *ngIf="productForm.get('shelfLife')?.invalid && productForm.get('shelfLife')?.touched" class="text-danger">
+          Shelf Life is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="unit_display" class="form-label">Unit Display</label>
+        <input type="text" id="unitDisplay" class="form-control" formControlName="unitDisplay" [(ngModel)]="selectedProducts.unitDisplay"/>
+        <div *ngIf="productForm.get('unitDisplay')?.invalid && productForm.get('unitDisplay')?.touched" class="text-danger">
+          Unit Display is required.
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <label for="unit_display" class="form-label"> SSU </label>
+        <!-- <input type="text" id="unitDisplay" class="form-control" formControlName="unitDisplay" /> -->
+        <select id="ssu" class="form-select" formControlName="ssu" [(ngModel)]="selectedProducts.ssu">
+          <option value="">Select SSU</option>
+          <option *ngFor="let unit of stdUnits" [value]="unit.key">{{ unit.value }}</option>
+        </select>
+        <div *ngIf="productForm.get('ssu')?.invalid && productForm.get('ssu')?.touched" class="text-danger">
+          SSU  is required.
+        </div>
+      </div>
+  
+      
+  
+      <div class="col-md-2 mb-3">
+        <label for="unit" class="form-label">Unit</label>
+        <input type="text" id="unit" class="form-control" formControlName="unit" [(ngModel)]="selectedProducts.unit"/>
+        <div *ngIf="productForm.get('unit')?.invalid && productForm.get('unit')?.touched" class="text-danger">
+          Unit is required.
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="packaging_type" class="form-label">Packaging Type</label>
+        <input type="text" id="packagingType" class="form-control" formControlName="packagingType" [(ngModel)]="selectedProducts.packagingType"/>
+        <div *ngIf="productForm.get('packagingType')?.invalid && productForm.get('packagingType')?.touched" class="text-danger">
+          Packaging Type is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="return_policy" class="form-label">Return Policy</label>
+        <select id="return_policy" class="form-select" formControlName="return_policy" [(ngModel)]="selectedProducts.return_policy">
+          <option value="">Select Return Policy</option>
+          <option *ngFor="let return of returnPolicy" [value]="return">{{ return }}</option>
+        </select>
+        <div *ngIf="productForm.get('return_policy')?.invalid && productForm.get('return_policy')?.touched" class="text-danger">
+          Return Policy is required.
+        </div>
+      </div>
+  
+      <div class="col-md-4 mb-3">
+        <label for="features" class="form-label">Features</label>
+        <textarea id="features" class="form-control" formControlName="features" [(ngModel)]="selectedProducts.features"></textarea>
+        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
+          Features cannot exceed 500 characters.
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <label for="discount" class="form-label">Discount</label>
+        <input id="discount" class="form-control" formControlName="discount" [(ngModel)]="selectedProducts.discount">
+        <div *ngIf="productForm.get('discount')?.invalid && productForm.get('discount')?.touched" class="text-danger">
+          discount cannot exceed 500 characters.
+        </div>
+      </div>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

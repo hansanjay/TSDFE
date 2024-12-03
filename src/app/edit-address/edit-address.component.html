@@ -1,0 +1,102 @@
+<ng-container>
+    <form [formGroup]="editAddForm" (ngSubmit)="modifyAddress()">
+<!-- Address Information Section  -->
+<div class="mb-4">
+<!-- <h4 class="mb-3">Edit Address Information</h4> -->
+<h4 class="fw-bold py-3 mb-4 text-center">
+    <span class="text-muted fw-light">Edit </span> Address
+  </h4>
+<div class="row mb-3">
+<div class="col-md-4">
+<label for="short_name" class="form-label">Short Name:</label>
+<input id="short_name" formControlName="short_name" type="text" class="form-control" [(ngModel)]="selectedAddress.short_name"/>
+</div>
+<div class="col-md-4">
+<label for="line1" class="form-label">Line 1:</label>
+<input id="line1" formControlName="line1" type="text" class="form-control" [(ngModel)]="selectedAddress.line1"  [ngClass]="{'is-invalid': editAddForm.get('line1')?.invalid && editAddForm.get('line1')?.touched}" />
+<div *ngIf="editAddForm.get('line1')?.invalid && editAddForm.get('line1')?.touched" class="invalid-feedback">
+Line 1 is required.
+</div>
+</div>
+<div class="col-md-4">
+<label for="line2" class="form-label">Line 2:</label>
+<input id="line2" formControlName="line2" type="text" class="form-control" [(ngModel)]="selectedAddress.line2"/>
+</div>
+</div>
+
+
+
+<div class="row mb-3">
+<div class="col-md-4">
+<label for="country" class="form-label">Country:</label>
+<select id="country" formControlName="country" [(ngModel)]="selectedAddress.country"class="form-select" [ngClass]="{'is-invalid': editAddForm.get('country')?.invalid && editAddForm.get('country')?.touched}"  (ngModelChange)="selectState($event)">
+<option value="">Select Country</option>
+<option *ngFor="let option of country?.data" [value]="option.countryCode">{{ option.countryName }}</option>
+</select>
+<div *ngIf="editAddForm.get('country')?.invalid && editAddForm.get('country')?.touched" class="invalid-feedback">
+Country is required.
+</div>
+</div>
+<div class="col-md-4">
+<label for="state_name" class="form-label">State:</label>
+<select id="state_name" formControlName="state_name" [(ngModel)]="selectedAddress.state_name" class="form-select" [ngClass]="{'is-invalid': editAddForm.get('state_name')?.invalid && editAddForm.get('state_name')?.touched}" (ngModelChange)="selectCity($event)">
+<option value="">Select State</option>
+<option *ngFor="let option of state?.data" [value]="option.id">{{ option.stateName }}</option>
+</select>
+<div *ngIf="editAddForm.get('state_name')?.invalid && editAddForm.get('state_name')?.touched" class="invalid-feedback">
+State is required.
+</div>
+</div>
+<div class="col-md-4">
+<label for="city" class="form-label">City:</label>
+<select id="city" formControlName="city" [(ngModel)]="selectedAddress.city" class="form-select" [ngClass]="{'is-invalid': editAddForm.get('city')?.invalid && editAddForm.get('city')?.touched}" (ngModelChange)="selectLocality($event)">
+<option value="">Select City</option>
+<option *ngFor="let city of cities" [value]="city.id">{{ city.cityName }}</option>
+</select>
+<div *ngIf="editAddForm.get('city')?.invalid && editAddForm.get('city')?.touched" class="invalid-feedback">
+City is required.
+</div>
+</div>
+</div>
+
+<div class="row mb-3">
+<div class="col-md-4">
+<label for="localityId" class="form-label">Locality:</label>
+<select id="localityId" formControlName="localityId" [(ngModel)]="selectedAddress.localityId"class="form-select" [ngClass]="{'is-invalid': editAddForm.get('localityId')?.invalid && editAddForm.get('localityId')?.touched}">
+<option value="">Select Locality</option>
+<option *ngFor="let loc of locality" [value]="loc.localityId">{{ loc.localityName }}</option>
+</select>
+<div *ngIf="editAddForm.get('localityId')?.invalid && editAddForm.get('localityId')?.touched" class="invalid-feedback">
+Locality is required.
+</div>
+</div>
+<div class="col-md-4">
+<label for="address" class="form-label">Address:</label>
+<input id="address" formControlName="address" [(ngModel)]="selectedAddress.address" type="text" class="form-control" [ngClass]="{'is-invalid': editAddForm.get('address')?.invalid && editAddForm.get('address')?.touched}" />
+<div *ngIf="editAddForm.get('address')?.invalid && editAddForm.get('address')?.touched" class="invalid-feedback">
+Address is required.
+</div>
+</div>
+<div class="col-md-4">
+<label for="pin_code" class="form-label">PIN Code:</label>
+<input id="pin_code" formControlName="pin_code" type="text" [(ngModel)]="selectedAddress.pin_code" class="form-control" [ngClass]="{'is-invalid': editAddForm.get('pin_code')?.invalid && editAddForm.get('pin_code')?.touched}" />
+<div *ngIf="editAddForm.get('pin_code')?.invalid && editAddForm.get('pin_code')?.touched" class="invalid-feedback">
+PIN code is required and must be 6 digits.
+</div>
+</div>
+</div>
+
+<!-- <div class="row mb-3">
+<div class="col-md-3" style="width: 200px;">
+<label for="is_verified" class="form-label" style="width: 100px;">Is Verified:</label>
+<input id="is_verified" formControlName="is_verified" type="checkbox" class="form-check-input" style="width: 20px;"/>
+</div>
+<div class="col-md-3"  style="width: 200px;">
+<label for="is_default" class="form-label" style="width: 100px;">Is Default:</label>
+<input id="is_default" formControlName="is_default" type="checkbox" class="form-check-input"  style="width: 20px;"/>
+</div>
+</div> -->
+</div>
+<button type="submit" class="btn btn-dark" style="width: 150px;">Update</button>
+</form>
+</ng-container>

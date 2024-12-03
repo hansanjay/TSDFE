@@ -1,0 +1,72 @@
+
+
+  // .search-form select,
+  // .search-form input {
+  //   width: 100%;
+  //   padding: 10px;
+  //   margin-bottom: 15px;
+  //   border: 1px solid #ccc;
+  //   border-radius: 4px;
+  //   font-size: 1em;
+  // }
+
+  // .search-button,
+  // .add-user-button {
+  //   width: 100%;
+  //   padding: 10px;
+  //   background-color: #007bff;
+  //   color: white;
+  //   border: none;
+  //   border-radius: 4px;
+  //   font-size: 1em;
+  //   cursor: pointer;
+  //   margin-bottom: 10px;
+  // }
+
+  // .search-button:hover {
+  //   background-color: #0056b3;
+  // }
+
+  // .add-user-button {
+  //   background-color: #28a745;
+  // }
+
+  // .add-user-button:hover {
+  //   background-color: #218838;
+  // }
+  .search-form {
+    // margin-top: 150px;
+    gap: 10px;
+  }
+  
+  .custom-select, .custom-input {
+    box-shadow: 0px 4px 6px rgba(0, 123, 255, 0.2);
+    border-color: lightblue;
+  }
+  
+  .custom-button {
+    background-color: rgb(23, 58, 70);
+    color: white;
+    box-shadow: 0px 4px 6px rgba(81, 94, 109, 0.3);
+    border: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .custom-button:hover {
+    background-color: deepskyblue;
+    box-shadow: 0px 6px 8px rgba(0, 123, 255, 0.4);
+  }
+  .container {
+    padding: 30px 0;
+  }
+  
+  #csv-input {
+    display: none;
+  }
+  .label{
+        width: 20%;
+    font-size: larger;
+    color: rgb(51, 32, 32);
+    font-style: inherit;
+    font-weight: 500;
+  }

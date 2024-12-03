@@ -1,0 +1,31 @@
+<div class="table-responsive text-nowrap table-striped mt-4">
+    <table class="table">
+      <thead class="table-light">
+  <!-- <table id="example" class="  display nowrap table table-hover table-striped table-bordered table-sm" style="width:100%"> -->
+          <!-- <thead> -->
+              <tr>
+                  <th>Customer Name</th>
+                  <th>Email</th>
+                  <th>Mobile No</th>
+                 
+                
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of allCustomer ">
+               
+                <td>{{user?.data.first_name}}</td>
+                <td>{{user?.data.email}}</td>
+                <td>{{user?.data.mobile}}</td>
+              
+             
+                
+                <!-- <td style="text-align: text-center"><i class="fa fa-map-pin" aria-hidden="true" (click)="fetchPincodes(user.id)" data-bs-toggle="modal" data-bs-target="#pincodesPop"></i></td> -->
+            
+        
+                
+              
+              </tr>
+          </tbody>
+      </table>
+    </div>
