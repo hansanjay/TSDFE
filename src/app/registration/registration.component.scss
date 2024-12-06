@@ -30,5 +30,21 @@ h2, h4 {
 .form-label {
   font-weight: 600;
 }
-
- 
+.w-100P{width: 100%;}
+.cstmw{width: 85%!important;}
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1em + 1.15rem + 4px);
+  padding: 0.325rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.rmb{width: 30%;}
