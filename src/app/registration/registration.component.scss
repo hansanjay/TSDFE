@@ -31,7 +31,7 @@ h2, h4 {
   font-weight: 600;
 }
 .w-100P{width: 100%;}
-.cstmw{width: 85%!important;}
+// .cstmw{width: 85%!important;}
 .form-control {
   display: block;
   width: 100%;
@@ -47,4 +47,8 @@ h2, h4 {
   border-radius: 0;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
-.rmb{width: 30%;}
+.rmb{width: 30%;} .layout-container {
+  
+  height: 93vh;
+  overflow: hidden;
+}

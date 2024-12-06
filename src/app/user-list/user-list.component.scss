@@ -70,3 +70,19 @@
     font-style: inherit;
     font-weight: 500;
   }
+  .bg-label-success{      color: white !important;
+    background: #1abc9c !important;}
+    .table:not(.table-dark) th {
+      color: #ffffff;
+      background: #1abc9c;
+      font-weight: bold;
+  }.fa-edit:before {
+    content: "\f044";
+    color: #727272;
+}.fa-upload:before {
+  content: "\f093";
+  color: #727272;
+}
+.fa-address-card:before {
+  content: "\f2bb"; color: #727272;
+}
