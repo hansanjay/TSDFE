@@ -1,41 +1,46 @@
 <!-- <h4 class="form-heading">Distributor Registration</h4> -->
+<div><img src="../../assets/img/illustrations/img3.png" class="img-fluid" width="100%"></div>
 <ng-container *ngIf="!distList">
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="container-fluid mt-5 p-4 border rounded bg-light shadow-sm">
-  <h4 class="fw-bold py-3 mb-4 text-center">
-    <span class="text-muted fw-light">Registration </span> Distributor
-  </h4>
-  <div  class="mb-4">
-    
-    <div class="row mb-3">
-      <div class="col-md-4">
-        <label for="userName" class="form-label">Distributor Org:</label>
-        <input id="userName" formControlName="companyName" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('companyName')?.invalid && registrationForm.get('companyName')?.touched}" />
-        <div *ngIf="registrationForm.get('companyName')?.invalid && registrationForm.get('companyName')?.touched" class="invalid-feedback">
-          Company name is required .
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="container-fluid mt-2  cstmw  p-2 ">
+   
+  <div  class="mb-4 " style="    width: 28%;
+  float: left;
+  margin-right: 2%;
+  padding: 1% 1% 0 2%;
+  border-right: dashed 1px #ccc;">
+    <div class=" ">
+      <div class="row mb-3 ">
+        <div class="col-md-12 ">
+          <label for="userName" class="form-label">Distributor Org:</label>
+          <input id="userName" formControlName="companyName" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('companyName')?.invalid && registrationForm.get('companyName')?.touched}" />
+          <div *ngIf="registrationForm.get('companyName')?.invalid && registrationForm.get('companyName')?.touched" class="invalid-feedback">
+            Company name is required .
+          </div>
+        </div>
+    <!-- <div class="row mb-3"> -->
+      <div class="col-md-12">
+        <label for="userName" class="form-label">PAN :</label>
+        <input id="userName" formControlName="pannum" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('pannum')?.invalid && registrationForm.get('pannum')?.touched}" />
+        <div *ngIf="registrationForm.get('pannum')?.invalid && registrationForm.get('pannum')?.touched" class="invalid-feedback">
+          PAN is required .
         </div>
       </div>
-  <!-- <div class="row mb-3"> -->
-    <div class="col-md-4">
-      <label for="userName" class="form-label">PAN :</label>
-      <input id="userName" formControlName="pannum" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('pannum')?.invalid && registrationForm.get('pannum')?.touched}" />
-      <div *ngIf="registrationForm.get('pannum')?.invalid && registrationForm.get('pannum')?.touched" class="invalid-feedback">
-        PAN is required .
+      <div class="col-md-12">
+        <label for="password" class="form-label">GST:</label>
+        <input id="password" formControlName="gstin" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('gstin')?.invalid && registrationForm.get('gstin')?.touched}" />
+        <div *ngIf="registrationForm.get('gstin')?.invalid && registrationForm.get('gstin')?.touched" class="invalid-feedback">
+          GST is required .
+        </div>
       </div>
+    <!-- </div>  -->
+  </div>
     </div>
-    <div class="col-md-4">
-      <label for="password" class="form-label">GST:</label>
-      <input id="password" formControlName="gstin" type="text" class="form-control" [ngClass]="{'is-invalid': registrationForm.get('gstin')?.invalid && registrationForm.get('gstin')?.touched}" />
-      <div *ngIf="registrationForm.get('gstin')?.invalid && registrationForm.get('gstin')?.touched" class="invalid-feedback">
-        GST is required .
-      </div>
-    </div>
-  <!-- </div>  -->
-</div>
+    
 
 </div>
-<div class="border p-3 mb-3">
+<div class="border p-3 mb-3 bg-light">
   <h5 class="mb-3"> 
-  <span class="text-muted fw-light">Contact </span> Information </h5>
+  <span class="text-muted fw-light ps-3">Contact </span> Information </h5>
   <div class="row mb-3">
     <div class="col-md-6">
       <label for="first_name" class="form-label">First Name:</label>
@@ -73,7 +78,7 @@
   </div>
  </div>
   <!-- Address Information Section  -->
-  <div formGroupName="addressReq" class="mb-4 border p-3">
+  <div formGroupName="addressReq" class="mb-2 border p-3 bg-light">
    
     <h5 class="mb-3"> 
       <span class="text-muted fw-light">Address </span> Information </h5>
@@ -185,12 +190,14 @@
     </div> -->
   </div>
 
-  <button type="submit" class="btn btn-dark" style="width: 150px;">Register</button>
+  <button type="submit" class="btn btn-dark" style="width: 150px;
+  background: #19bc9b;
+  border: #19bc9b 1px;">Register</button>
 </form>
 </ng-container>
 
 <ng-container *ngIf="distList">
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="container-fluid mt-5 p-4 border rounded bg-light shadow-sm">
+<form  [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="container-fluid mt-2 p-4 border rounded shadow-sm" >
   <h4 class="fw-bold py-3 mb-4 text-center">
     <span class="text-muted fw-light">Registration </span> Distributor
   </h4>
@@ -263,7 +270,7 @@
   </div>
  </div>
   <!-- Address Information Section  -->
-  <div formGroupName="addressReq" class="mb-4 border p-3">
+  <div formGroupName="addressReq" class="mb-2 border p-3">
    
     <h5 class="mb-3"> 
       <span class="text-muted fw-light">Address </span> Information </h5>
