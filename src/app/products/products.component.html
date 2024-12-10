@@ -1,12 +1,8 @@
-<div class="container mt-4">
+<div><img src="../../assets/img/illustrations/img4.png" width="100%"></div>
+<div class="container mt-4 bx1">
  
-  <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="!selectedProducts">
-    <span class="text-muted fw-light">Add </span> Product Details
-  </h4>
   <!-- <h2 class="mb-4" *ngIf="selectedProducts">Edit Product Details</h2> -->
-  <h4 class="fw-bold py-3 mb-4 text-center" *ngIf="selectedProducts">
-    <span class="text-muted fw-light">Edit </span> Product Details
-  </h4>
+  
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()" *ngIf="!selectedProducts">
     <div class="row">
       <div class="col-md-4 mb-3">
