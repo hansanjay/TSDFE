@@ -1,5 +1,5 @@
 <div><img src="../../assets/img/illustrations/img4.png" width="100%"></div>
-<div class="container mt-4 bx1">
+<div class="container mt-4 bx1" style="width: 100%; max-width: 100%;">
  
   <!-- <h2 class="mb-4" *ngIf="selectedProducts">Edit Product Details</h2> -->
   
@@ -125,18 +125,19 @@
         </div>
       </div>
   
-      <div class="col-md-4 mb-3">
-        <label for="features" class="form-label">Features</label>
-        <textarea id="features" class="form-control" formControlName="features"></textarea>
-        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
-          Features cannot exceed 500 characters.
-        </div>
-      </div>
+     
       <div class="col-md-4 mb-3">
         <label for="discount" class="form-label">Discount</label>
         <input id="discount" class="form-control" formControlName="discount">
         <div *ngIf="productForm.get('discount')?.invalid && productForm.get('discount')?.touched" class="text-danger">
           discount cannot exceed 500 characters.
+        </div>
+      </div>
+      <div class="col-md-8 mb-3">
+        <label for="features" class="form-label">Features</label>
+        <textarea id="features" class="form-control" formControlName="features"></textarea>
+        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
+          Features cannot exceed 500 characters.
         </div>
       </div>
     </div>
@@ -262,12 +263,7 @@
         </div>
       </div>
   
-      <div class="col-md-4 mb-3">
-        <label for="features" class="form-label">Features</label>
-        <textarea id="features" class="form-control" formControlName="features" [(ngModel)]="selectedProducts.features"></textarea>
-        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
-          Features cannot exceed 500 characters.
-        </div>
+      
       </div>
       <div class="col-md-4 mb-3">
         <label for="discount" class="form-label">Discount</label>
@@ -276,6 +272,12 @@
           discount cannot exceed 500 characters.
         </div>
       </div>
+      <div class="col-md-8 mb-3">
+        <label for="features" class="form-label">Features</label>
+        <textarea id="features" class="form-control" formControlName="features" [(ngModel)]="selectedProducts.features"></textarea>
+        <div *ngIf="productForm.get('features')?.invalid && productForm.get('features')?.touched" class="text-danger">
+          Features cannot exceed 500 characters.
+        </div>
     </div>
   
     <button type="submit" class="btn btn-primary">Submit</button>
